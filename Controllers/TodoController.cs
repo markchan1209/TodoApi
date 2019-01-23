@@ -7,6 +7,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class TodoController : ControllerBase
@@ -27,7 +28,11 @@ namespace TodoApi.Controllers
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItem() {
             return await _context.TodoItems.ToListAsync();
         }
-
+        
+        /// <summary>
+        ///  Get a specific TodoItemList
+        /// </summary>
+        /// <param name="id"></param> 
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItem>> GetTodoItem(long id) {
             var todoItem = await _context.TodoItems.FindAsync(id);
